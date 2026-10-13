@@ -3,37 +3,305 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curio | Mystery & Facts</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Discover amazing facts about science, history, space and the mysteries of our world with Curio.">
+  <title>Curio — Discover Something Amazing</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f8fc;
+      color: #172033;
+      line-height: 1.6;
+    }
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .logo { font-size: 29px; font-weight: 800; letter-spacing: -1px; }
+    .logo span { color: #a78bfa; }
+    nav { display: flex; gap: 22px; flex-wrap: wrap; }
+    nav a { color: #e5e7eb; text-decoration: none; font-size: 14px; }
+    nav a:hover { color: #c4b5fd; }
+    .hero {
+      padding: 75px 7% 65px;
+      background: linear-gradient(130deg, #111827, #29204c 70%, #49318a);
+      color: white;
+    }
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #8b7aca;
+      border-radius: 30px;
+      color: #ddd6fe;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      max-width: 760px;
+      line-height: 1.12;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: #c4b5fd; }
+    .hero p { max-width: 570px; color: #d1d5db; margin-bottom: 28px; }
+    .hero-button {
+      display: inline-block;
+      background: #a78bfa;
+      color: #17112c;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 13px 22px;
+      border-radius: 8px;
+    }
+    .hero-button:hover { background: #c4b5fd; }
+    .wrap { max-width: 1150px; margin: auto; padding: 45px 22px; }
+    .section-heading { margin-bottom: 23px; }
+    .section-heading h2 { font-size: 29px; letter-spacing: -0.7px; }
+    .section-heading p { color: #667085; font-size: 14px; }
+    .categories { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+    .category {
+      border: 1px solid #e0e3eb;
+      background: white;
+      padding: 9px 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #344054;
+    }
+    .category.active, .category:hover {
+      background: #29204c;
+      color: white;
+      border-color: #29204c;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e9ebf2;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px #17203312;
+    }
+    .art {
+      min-height: 155px;
+      display: grid;
+      place-items: center;
+      font-size: 66px;
+      background: linear-gradient(135deg, #e8e7ff, #f4e9ff);
+    }
+    .card:nth-child(3n+2) .art { background: linear-gradient(135deg,#dff5f3,#e8edff); }
+    .card:nth-child(3n) .art { background: linear-gradient(135deg,#fff0d9,#ffe6ec); }
+    .card-content { padding: 21px; }
+    .label {
+      color: #7555c9;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .card h3 { font-size: 19px; line-height: 1.4; margin: 8px 0 10px; }
+    .card p { color: #667085; font-size: 14px; margin-bottom: 16px; }
+    .read {
+      border: none;
+      background: transparent;
+      color: #6941c6;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .article-detail {
+      display: none;
+      padding: 14px;
+      background: #f5f3ff;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+    .article-detail.open { display: block; }
+    .newsletter {
+      margin-top: 50px;
+      background: #eeebff;
+      border-radius: 16px;
+      padding: 35px;
+      text-align: center;
+    }
+    .newsletter h2 { margin-bottom: 8px; }
+    .newsletter p { color: #667085; margin-bottom: 16px; }
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      text-align: center;
+      padding: 28px 15px;
+      font-size: 13px;
+    }
+    footer strong { color: #c4b5fd; }
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      header { padding: 16px 5%; }
+      .hero { padding: 55px 6%; }
+    }
+    @media (max-width: 540px) {
+      .grid { grid-template-columns: 1fr; }
+      nav { gap: 13px; }
+      .hero h1 { letter-spacing: -1px; }
+      .newsletter { padding: 25px 16px; }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>CURIO</h1>
-    <p>Discover the mysteries of our world.</p>
+    <a href="#" class="logo" style="color:white;text-decoration:none">curio<span>.</span></a>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#discover">Discover</a>
+      <a href="#about">About</a>
+    </nav>
   </header>
 
-  <main>
-    <h2>Welcome to Curio</h2>
-    <p>Explore strange mysteries and amazing facts.</p>
+  <section class="hero">
+    <span class="tag">YOUR DAILY DOSE OF CURIOSITY</span>
+    <h1>The world is full of <span>amazing stories.</span></h1>
+    <p>Explore fascinating facts, incredible discoveries and surprising secrets about the universe we live in. There's always something new to learn.</p>
+    <a href="#discover" class="hero-button">Start discovering →</a>
+  </section>
 
-    <article>
-      <h2>Why Is Space Dark?</h2>
-      <p>Space is enormous, and light from many distant stars has not had enough time to reach us. Most of space is also extremely empty.</p>
-    </article>
+  <main class="wrap" id="discover">
+    <div class="section-heading">
+      <h2>Explore the extraordinary</h2>
+      <p>Big questions. Amazing facts. New discoveries.</p>
+    </div>
 
-    <article>
-      <h2>Three Hearts of an Octopus</h2>
-      <p>An octopus has three hearts. Two pump blood to the gills, while the third pumps blood around the body.</p>
-    </article>
+    <div class="categories">
+      <button class="category active" data-filter="all">All facts</button>
+      <button class="category" data-filter="science">Science</button>
+      <button class="category" data-filter="space">Space</button>
+      <button class="category" data-filter="history">History</button>
+      <button class="category" data-filter="nature">Nature</button>
+    </div>
 
-    <article>
-      <h2>The Mystery of Deep Oceans</h2>
-      <p>Much of the deep ocean remains unexplored, and scientists continue discovering fascinating marine life.</p>
-    </article>
+    <div class="grid">
+      <article class="card" data-category="space">
+        <div class="art">🌌</div>
+        <div class="card-content">
+          <span class="label">Space</span>
+          <h3>A day on Venus is longer than its year</h3>
+          <p>One of the strangest facts about our neighbouring planet.</p>
+          <button class="read" aria-expanded="false">Discover why →</button>
+          <div class="article-detail">Venus takes about 243 Earth days to rotate once on its axis, but only about 225 Earth days to orbit the Sun. Its rotation is exceptionally slow.</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="nature">
+        <div class="art">🐙</div>
+        <div class="card-content">
+          <span class="label">Nature</span>
+          <h3>The octopus has three hearts</h3>
+          <p>This ocean animal has a remarkable circulatory system.</p>
+          <button class="read" aria-expanded="false">Discover why →</button>
+          <div class="article-detail">Two hearts pump blood toward the gills, while a third pumps blood to the rest of the body. Octopus blood also contains a copper-based protein that helps carry oxygen.</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="science">
+        <div class="art">⚡</div>
+        <div class="card-content">
+          <span class="label">Science</span>
+          <h3>Lightning is incredibly hot</h3>
+          <p>A flash of lightning can heat the air to extreme temperatures.</p>
+          <button class="read" aria-expanded="false">Discover why →</button>
+          <div class="article-detail">The air in a lightning channel can briefly reach around 30,000°C, roughly five times the temperature of the Sun's visible surface.</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="history">
+        <div class="art">🏛️</div>
+        <div class="card-content">
+          <span class="label">History</span>
+          <h3>Cleopatra lived closer to the Moon landing</h3>
+          <p>Ancient history can be surprising when you look at the dates.</p>
+          <button class="read" aria-expanded="false">Discover why →</button>
+          <div class="article-detail">Cleopatra VII lived from 69 to 30 BCE. The Great Pyramid of Giza was already more than 2,000 years old in her lifetime, and the 1969 Moon landing was closer to her era than pyramid construction was.</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="nature">
+        <div class="art">🌳</div>
+        <div class="card-content">
+          <span class="label">Nature</span>
+          <h3>Trees can communicate through ecosystems</h3>
+          <p>Forests are more connected than they might appear.</p>
+          <button class="read" aria-expanded="false">Discover why →</button>
+          <div class="article-detail">Plants can exchange chemical signals and interact with fungi around their roots. Scientists study how these networks influence forest ecosystems; popular descriptions sometimes exaggerate what is known.</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="science">
+        <div class="art">🧬</div>
+        <div class="card-content">
+          <span class="label">Science</span>
+          <h3>Your body is constantly renewing itself</h3>
+          <p>Many of your cells are replaced throughout your life.</p>
+          <button class="read" aria-expanded="false">Discover why →</button>
+          <div class="article-detail">Different cell types renew at different rates. The lining of your intestine turns over quickly, while many nerve cells can last for decades. There is no single timetable for the entire body.</div>
+        </div>
+      </article>
+    </div>
+
+    <section class="newsletter" id="about">
+      <h2>Stay curious. Keep exploring.</h2>
+      <p>Curio is your place to discover the fascinating side of our world.</p>
+      <a href="#discover" class="hero-button">Explore more facts</a>
+    </section>
   </main>
 
   <footer>
-    <p>� 2026 Curio | Explore. Discover. Learn.</p>
+    <p><strong>curio.</strong> — Never stop wondering.</p>
+    <p>© 2026 Curio. Made for curious minds.</p>
   </footer>
+
+  <script>
+    const filters = document.querySelectorAll(".category");
+    const cards = document.querySelectorAll(".card");
+
+    filters.forEach(button => {
+      button.addEventListener("click", () => {
+        filters.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+
+        const chosen = button.dataset.filter;
+        cards.forEach(card => {
+          card.style.display =
+            chosen === "all" || card.dataset.category === chosen
+              ? ""
+              : "none";
+        });
+      });
+    });
+
+    document.querySelectorAll(".read").forEach(button => {
+      button.addEventListener("click", () => {
+        const detail = button.nextElementSibling;
+        const opening = !detail.classList.contains("open");
+        detail.classList.toggle("open");
+        button.setAttribute("aria-expanded", opening);
+        button.textContent = opening ? "Show less ↑" : "Discover why →";
+      });
+    });
+  </script>
 </body>
 </html>
