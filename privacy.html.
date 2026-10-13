@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Read the Curio Privacy Policy to learn how visitor information is handled.">
+  <title>Privacy Policy | Curio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7fc;
+      color: #20213a;
+      line-height: 1.8;
+      margin: 0;
+    }
+    header {
+      background: #101124;
+      padding: 20px 7%;
+    }
+    header a {
+      color: white;
+      font-size: 27px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    header span { color: #a994ff; }
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 16px;
+    }
+    h1, h2 { color: #6240e8; }
+    .back { color: #6240e8; }
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #71738b;
+    }
+    @media(max-width:600px) {
+      main { margin: 20px 12px; padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">curio<span>.</span></a>
+  </header>
+
+  <main>
+    <a class="back" href="index.html">← Back to Curio</a>
+    <h1>Privacy Policy</h1>
+    <p><strong>Last updated:</strong> 13 October 2026</p>
+
+    <p>Welcome to Curio. This Privacy Policy explains how information may be collected and used when you visit our website.</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>Curio is an informational website. We do not ask visitors to create accounts or submit personal information to read our articles. If you contact us by email, we may receive the information you include in your message.</p>
+
+    <h2>2. Cookies and Similar Technologies</h2>
+    <p>Our hosting provider or future third-party services may use cookies or similar technologies for security, website operation, analytics or advertising. Their use depends on which services are enabled on the website.</p>
+
+    <h2>3. Advertising and Third-Party Services</h2>
+    <p>If Curio uses advertising, analytics or other third-party services in the future, those providers may process information such as browser details, device information, approximate location or browsing activity according to their own policies.</p>
+    <p>We will update this policy when we add services that materially change how visitor information is handled. Third-party providers have their own privacy policies and terms.</p>
+
+    <h2>4. How Information Is Used</h2>
+    <p>Information received through contact messages may be used to respond to enquiries, maintain website security and improve our content. We do not sell personal information that you send directly to us.</p>
+
+    <h2>5. Data Security</h2>
+    <p>We take reasonable steps to protect information under our control. However, no website or method of internet transmission can be guaranteed completely secure.</p>
+
+    <h2>6. Children's Privacy</h2>
+    <p>Curio publishes general educational content. We do not knowingly request personal information from children. Anyone who contacts us should avoid sharing unnecessary sensitive or private information.</p>
+
+    <h2>7. Your Privacy Rights</h2>
+    <p>Depending on your location and applicable law, you may have rights to access, correct or request deletion of personal information. You can contact us with a privacy enquiry.</p>
+
+    <h2>8. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy as the website develops. Changes will be published on this page with an updated revision date.</p>
+
+    <h2>9. Contact</h2>
+    <p>For privacy questions, please use a valid contact address provided by the Curio website owner. We will add our official contact details here when available.</p>
+
+    <p><em>This page is general information, not legal advice. Review it and adapt it to the services Curio actually uses and the laws that apply.</em></p>
+  </main>
+
+  <footer>© <span id="year"></span> Curio · <a href="index.html">Home</a></footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
