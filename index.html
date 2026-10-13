@@ -1,358 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Discover fascinating facts, science, space, history and nature with Curio.">
-<meta name="theme-color" content="#101124">
-<title>Curio — Discover Something Amazing</title>
-<style>
-:root {
-  --bg:#f7f7fc; --card:#fff; --text:#20213a;
-  --muted:#71738b; --purple:#7857ff; --dark:#101124;
-  --border:#e8e8f2;
-}
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  margin:0; font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg); color:var(--text); line-height:1.7;
-}
-a { color:inherit; }
-header {
-  background:var(--dark); color:white; padding:17px 6%;
-  display:flex; justify-content:space-between; align-items:center;
-  gap:18px; flex-wrap:wrap;
-}
-.logo { color:white; font-size:28px; font-weight:900;
-  letter-spacing:-1px; text-decoration:none; }
-.logo span { color:#a994ff; }
-nav { display:flex; gap:20px; flex-wrap:wrap; }
-nav a { text-decoration:none; color:#deddf0; font-size:14px; }
-nav a:hover { color:#b9aaff; }
-.hero {
-  background:linear-gradient(135deg,#101124,#292050 65%,#49329a);
-  color:white; text-align:center; padding:75px 20px 70px;
-}
-.eyebrow {
-  display:inline-block; color:#d4caff; background:#ffffff16;
-  border:1px solid #ffffff28; border-radius:30px;
-  padding:6px 14px; font-size:12px; letter-spacing:1px;
-  text-transform:uppercase;
-}
-.hero h1 {
-  font-size:clamp(36px,6vw,65px); line-height:1.1;
-  margin:22px auto 16px; max-width:800px;
-}
-.hero h1 span { color:#b5a2ff; }
-.hero p { color:#d5d2e9; max-width:600px; margin:0 auto 26px; }
-.primary-btn {
-  display:inline-block; border:0; border-radius:10px;
-  padding:13px 22px; background:var(--purple); color:white;
-  font-weight:bold; text-decoration:none; cursor:pointer;
-}
-.primary-btn:hover { background:#6240e8; }
-main { max-width:1150px; margin:auto; padding:42px 20px 65px; }
-.section-heading {
-  display:flex; align-items:end; justify-content:space-between;
-  gap:15px; flex-wrap:wrap; margin-bottom:22px;
-}
-.section-heading h2 {
-  font-size:clamp(25px,4vw,34px); line-height:1.2;
-  margin:0 0 5px;
-}
-.section-heading p { color:var(--muted); margin:0; }
-.search-box {
-  width:100%; max-width:330px; padding:13px 15px;
-  border:1px solid var(--border); border-radius:10px;
-  background:white; color:var(--text); font-size:15px;
-}
-.filters { display:flex; gap:9px; flex-wrap:wrap; margin:22px 0 28px; }
-.filter-btn {
-  border:1px solid var(--border); background:white; color:var(--text);
-  border-radius:30px; padding:9px 17px; cursor:pointer; font-size:14px;
-}
-.filter-btn.active,.filter-btn:hover {
-  background:var(--purple); color:white; border-color:var(--purple);
-}
-.grid {
-  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px;
-}
-.card {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:17px; overflow:hidden; display:flex; flex-direction:column;
-  box-shadow:0 5px 20px #20213a08; transition:transform .2s;
-}
-.card:hover { transform:translateY(-4px); }
-.card[hidden] { display:none; }
-.card-art {
-  min-height:155px; display:grid; place-items:center; font-size:65px;
-  background:linear-gradient(135deg,#eee9ff,#dcd5ff);
-}
-.card:nth-child(4n+2) .card-art { background:linear-gradient(135deg,#dff6ff,#c9ddff); }
-.card:nth-child(4n+3) .card-art { background:linear-gradient(135deg,#e3f8e8,#bcebd0); }
-.card:nth-child(4n+4) .card-art { background:linear-gradient(135deg,#fff0dc,#ffd8bf); }
-.card-body { padding:20px; display:flex; flex-direction:column; flex:1; }
-.tag { font-size:11px; color:#6847eb; text-transform:uppercase; font-weight:bold; letter-spacing:.8px; }
-.card h3 { font-size:20px; line-height:1.35; margin:9px 0; }
-.card p { color:var(--muted); font-size:14px; margin:0 0 17px; }
-.read-btn {
-  margin-top:auto; align-self:flex-start; border:0; background:none;
-  color:#6847eb; font-size:14px; font-weight:bold; cursor:pointer; padding:5px 0;
-}
-.read-btn:hover { text-decoration:underline; }
-.article-detail { border-top:1px solid var(--border); padding-top:14px; margin-top:12px; font-size:14px; color:#45465f; }
-.article-detail[hidden] { display:none; }
-.article-detail p { color:#45465f; }
-.article-detail h4 { margin:12px 0 4px; }
-.empty { display:none; text-align:center; color:var(--muted); padding:40px 10px; }
-.about { margin-top:65px; padding:36px; border-radius:18px; background:#eeebff; }
-.about h2 { margin-top:0; }
-.about p { max-width:760px; color:#54516c; }
-footer { background:var(--dark); color:white; padding:35px 20px; text-align:center; }
-footer p { color:#c6c5dc; font-size:13px; }
-.footer-links { display:flex; justify-content:center; gap:18px; flex-wrap:wrap; }
-.footer-links a { color:#c3b6ff; font-size:14px; text-decoration:none; }
-.footer-links a:hover { text-decoration:underline; }
-@media(max-width:850px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media(max-width:560px) {
-  header { padding:15px 5%; } nav { gap:13px; }
-  .hero { padding:55px 18px; } main { padding:32px 15px 45px; }
-  .grid { grid-template-columns:1fr; } .card-art { min-height:140px; }
-  .about { padding:24px; } .search-box { max-width:100%; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover fascinating facts, mysterious stories, science discoveries, and amazing things about our world on Curio.">
+  <meta name="theme-color" content="#0b0818">
+  <title>Curio | Explore the Unknown</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0818;
+      color: #f5f3ff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    header {
+      background: #15102b;
+      border-bottom: 1px solid #352653;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .logo {
+      color: #c4a1ff;
+      font-size: 29px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-size: 14px;
+      color: #eee7ff;
+    }
+
+    nav a:hover,
+    footer a:hover {
+      color: #c4a1ff;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 75px 20px 65px;
+      background: radial-gradient(
+        circle at top,
+        #39205d 0%,
+        #17102f 48%,
+        #0b0818 100%
+      );
+    }
+
+    .eyebrow {
+      color: #d1b6ff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 8vw, 68px);
+      line-height: 1.1;
+      margin: 15px 0;
+    }
+
+    .hero h1 span {
+      color: #c4a1ff;
+    }
+
+    .hero p {
+      color: #d3c9e5;
+      max-width: 600px;
+      margin: 0 auto 25px;
+    }
+
+    .hero-button {
+      display: inline-block;
+      background: #b68cff;
+      color: #160b27;
+      padding: 12px 23px;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero-button:hover {
+      background: #d0b5ff;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: 40px auto;
+    }
+
+    .section-heading {
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 5px;
+      font-size: 28px;
+    }
+
+    .section-heading p {
+      color: #b9afcc;
+      margin-top: 0;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 14px 16px;
+      margin: 5px 0 18px;
+      background: #15102b;
+      border: 1px solid #493663;
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: #c4a1ff;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 27px;
+    }
+
+    .filter-btn {
+      border: 1px solid #493663;
+      background: #15102b;
+      color: #eee7ff;
+      border-radius: 20px;
+      padding: 9px 16px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #b68cff;
+      border-color: #b68cff;
+      color: #160b27;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .article-card {
+      background: #15102b;
+      border: 1px solid #302345;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      border-color: #7652a6;
+    }
+
+    .article-art {
+      min-height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 65px;
+      background: linear-gradient(135deg, #302052, #17102f);
+    }
+
+    .article-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .category {
+      color: #c4a1ff;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: bold;
+    }
+
+    .article-content h3 {
+      font-size: 20px;
+      line-height: 1.35;
+      margin: 9px 0;
+    }
+
+    .article-content p {
+      color: #c9c0d9;
+      font-size: 14px;
+    }
+
+    .article-content .article-body {
+      color: #e6dff0;
+      border-top: 1px solid #352653;
+      padding-top: 12px;
+      margin-top: 5px;
+    }
+
+    .read-btn {
+      margin-top: auto;
+      align-self: flex-start;
+      padding: 9px 14px;
+      border: 1px solid #8c65c5;
+      background: transparent;
+      color: #d7baff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .read-btn:hover {
+      background: #302052;
+    }
+
+    .empty-message {
+      display: none;
+      color: #c9c0d9;
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .about-strip {
+      margin-top: 55px;
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid #493663;
+      background: linear-gradient(135deg, #21153b, #15102b);
+      text-align: center;
+    }
+
+    .about-strip h2 {
+      color: #d2b6ff;
+    }
+
+    .about-strip p {
+      color: #d0c5e2;
+      max-width: 650px;
+      margin: 0 auto 20px;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 30px 15px;
+      border-top: 1px solid #352653;
+      text-align: center;
+      color: #b9afcc;
+      font-size: 14px;
+    }
+
+    footer .footer-logo {
+      font-size: 23px;
+      font-weight: bold;
+      color: #c4a1ff;
+      margin-bottom: 5px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin: 18px 0;
+    }
+
+    .footer-links a {
+      color: #d4baff;
+      text-decoration: none;
+    }
+
+    .copyright {
+      font-size: 12px;
+      color: #9589aa;
+    }
+
+    @media (max-width: 850px) {
+      .article-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      .hero {
+        padding: 55px 18px;
+      }
+
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        width: 92%;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <a class="logo" href="#home">curio<span>.</span></a>
-  <nav aria-label="Main navigation">
-    <a href="#home">Home</a>
-    <a href="#articles">Explore</a>
-    <a href="#about">About</a>
-  </nav>
-</header>
 
-<section class="hero" id="home">
-  <span class="eyebrow">Curiosity starts here</span>
-  <h1>The world is full of <span>surprises.</span></h1>
-  <p>Discover fascinating facts, hidden mysteries and incredible discoveries about our universe, our planet and the past.</p>
-  <a class="primary-btn" href="#articles">Explore the articles ↓</a>
-</section>
+  <header>
+    <a class="logo" href="index.html">Curio ✨</a>
 
-<main>
-<section id="articles">
-  <div class="section-heading">
-    <div>
-      <h2>Discover something amazing</h2>
-      <p>Ten fascinating stories to spark your curiosity.</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="#articles">Articles</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Explore. Discover. Learn.</div>
+    <h1>Curiosity starts <span>here.</span></h1>
+    <p>
+      Discover amazing facts, mysterious stories, science discoveries,
+      and secrets of our world. There's always something new to learn.
+    </p>
+    <a class="hero-button" href="#articles">Start Exploring →</a>
+  </section>
+
+  <main class="container" id="articles">
+
+    <div class="section-heading">
+      <h2>Discover Something Amazing</h2>
+      <p>Ten fascinating stories to get your curiosity started.</p>
     </div>
-    <input class="search-box" id="searchInput" type="search" placeholder="Search articles..." aria-label="Search articles">
-  </div>
 
-  <div class="filters" aria-label="Filter articles">
-    <button class="filter-btn active" data-filter="all" aria-pressed="true">All facts</button>
-    <button class="filter-btn" data-filter="space" aria-pressed="false">Space</button>
-    <button class="filter-btn" data-filter="science" aria-pressed="false">Science</button>
-    <button class="filter-btn" data-filter="nature" aria-pressed="false">Nature</button>
-    <button class="filter-btn" data-filter="history" aria-pressed="false">History</button>
-  </div>
+    <input
+      class="search-box"
+      type="search"
+      id="searchInput"
+      placeholder="🔎 Search facts, mysteries, science..."
+      aria-label="Search articles"
+    >
 
-  <div class="grid" id="articleGrid">
+    <div class="filters" aria-label="Filter articles by category">
+      <button class="filter-btn active" data-category="all">All Stories</button>
+      <button class="filter-btn" data-category="space">Space</button>
+      <button class="filter-btn" data-category="science">Science</button>
+      <button class="filter-btn" data-category="nature">Nature</button>
+      <button class="filter-btn" data-category="history">History</button>
+      <button class="filter-btn" data-category="mystery">Mysteries</button>
+    </div>
 
-    <article class="card" data-category="nature">
-      <div class="card-art" aria-hidden="true">🌊</div><div class="card-body">
-      <span class="tag">Nature · Ocean</span><h3>The Ocean's Hidden World</h3>
-      <p>The deep ocean is one of Earth's least explored environments.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>Sunlight fades rapidly as you descend into the ocean. Deep-sea animals have adapted to darkness, cold temperatures and enormous pressure.</p>
-        <h4>How do they find food?</h4>
-        <p>Some eat marine snow, the organic material drifting down from above. Others hunt or live near hydrothermal vents. Researchers use underwater robots and submersibles to study these environments.</p>
-      </div></div>
-    </article>
+    <div class="article-grid" id="articleGrid">
 
-    <article class="card" data-category="space">
-      <div class="card-art" aria-hidden="true">🪐</div><div class="card-body">
-      <span class="tag">Space · Planets</span><h3>The Planet Where a Day Lasts Longer Than a Year</h3>
-      <p>Venus rotates so slowly that one rotation takes longer than its year.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>Venus takes about 243 Earth days to rotate once relative to distant stars, while its orbit around the Sun takes about 225 Earth days.</p>
-        <h4>Why is Venus so hot?</h4>
-        <p>Its thick carbon-dioxide atmosphere traps heat through an intense greenhouse effect. Venus also rotates in the opposite direction to most planets.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="space">
+        <div class="article-art">🌌</div>
+        <div class="article-content">
+          <span class="category">Space</span>
+          <h3>Why Is Space So Dark?</h3>
+          <p>With billions of stars in the universe, why does space look black?</p>
+          <div class="article-body" hidden>
+            Space looks dark because the universe is expanding and has a finite
+            age. Light from many distant stars and galaxies has not had enough
+            time to reach us. Light also spreads out as the universe expands.
+            The night sky is not filled with visible light from every direction.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-    <article class="card" data-category="nature">
-      <div class="card-art" aria-hidden="true">🐙</div><div class="card-body">
-      <span class="tag">Nature · Animals</span><h3>The Animal With Three Hearts</h3>
-      <p>Octopuses have three hearts and an unusual nervous system.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>Two hearts pump blood through the gills, where oxygen enters the blood. The third pumps blood to the rest of the body.</p>
-        <h4>What makes octopuses special?</h4>
-        <p>They can solve certain puzzles, open containers and change their skin colour and texture to blend into their surroundings.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="nature">
+        <div class="article-art">🐙</div>
+        <div class="article-content">
+          <span class="category">Nature</span>
+          <h3>The Octopus Has Three Hearts</h3>
+          <p>This ocean animal has a surprisingly unusual circulatory system.</p>
+          <div class="article-body" hidden>
+            An octopus has three hearts. Two pump blood toward the gills,
+            where oxygen is collected. The third pumps blood to the rest of
+            the body. Octopus blood is blue because it uses a copper-containing
+            protein called hemocyanin to carry oxygen.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-    <article class="card" data-category="history">
-      <div class="card-art" aria-hidden="true">🏜️</div><div class="card-body">
-      <span class="tag">History · Ancient world</span><h3>The Mystery of the Egyptian Pyramids</h3>
-      <p>Discover what archaeology reveals about these ancient structures.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>The Great Pyramid of Giza was built for Pharaoh Khufu more than 4,500 years ago. It originally stood about 146.6 metres tall.</p>
-        <h4>How were they built?</h4>
-        <p>Evidence points to organised teams, quarries, transport routes and carefully planned construction. Researchers continue to investigate the exact techniques used.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="science">
+        <div class="article-art">🧠</div>
+        <div class="article-content">
+          <span class="category">Science</span>
+          <h3>Your Brain Is Always Working</h3>
+          <p>Your brain keeps managing important processes even while you sleep.</p>
+          <div class="article-body" hidden>
+            Your brain helps control breathing, memory, movement, and many
+            other functions. During sleep, it remains active and cycles through
+            different stages. Sleep also supports learning and memory.
+            Your brain does not simply switch off when you go to bed.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-    <article class="card" data-category="science">
-      <div class="card-art" aria-hidden="true">⚡</div><div class="card-body">
-      <span class="tag">Science · Weather</span><h3>The Science Behind Lightning</h3>
-      <p>A flash of lightning is a powerful electrical discharge during a storm.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>Collisions between ice particles and water droplets in storm clouds help separate electrical charges. A discharge can occur when the electric field becomes strong enough.</p>
-        <h4>Why do we hear thunder?</h4>
-        <p>Lightning heats the surrounding air very quickly. The air expands rapidly, creating the sound wave we hear as thunder. Always seek shelter indoors during a thunderstorm.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="space">
+        <div class="article-art">🪐</div>
+        <div class="article-content">
+          <span class="category">Space</span>
+          <h3>A Day Longer Than a Year</h3>
+          <p>One planet has a rotation period longer than its trip around the Sun.</p>
+          <div class="article-body" hidden>
+            Venus takes about 243 Earth days to rotate once relative to the
+            distant stars, but it takes about 225 Earth days to orbit the Sun.
+            Venus also rotates in the opposite direction to most planets.
+            Its thick atmosphere makes its surface extremely hot.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-    <article class="card" data-category="space">
-      <div class="card-art" aria-hidden="true">🪐</div><div class="card-body">
-      <span class="tag">Space · Saturn</span><h3>The Planet With Spectacular Rings</h3>
-      <p>Saturn's rings are made of countless separate particles.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>Saturn's rings contain pieces of water ice, rocky material and dust. Their particles range from tiny grains to larger chunks.</p>
-        <h4>Are the rings solid?</h4>
-        <p>No. They look like solid bands from far away, but consist of separate particles orbiting Saturn. Scientists study them to learn about gravity and planetary history.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="nature">
+        <div class="article-art">🌳</div>
+        <div class="article-content">
+          <span class="category">Nature</span>
+          <h3>How Trees Communicate</h3>
+          <p>Forests contain complex underground connections between living things.</p>
+          <div class="article-body" hidden>
+            Tree roots can connect with fungi that form networks in the soil.
+            These fungi help plants obtain nutrients and water. Scientists
+            study how resources and chemical signals move through these
+            relationships. However, popular claims about trees deliberately
+            talking like humans often oversimplify the science.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-    <article class="card" data-category="nature">
-      <div class="card-art" aria-hidden="true">🐝</div><div class="card-body">
-      <span class="tag">Nature · Insects</span><h3>How Bees Find Their Way Home</h3>
-      <p>Honeybees use the Sun and landmarks to help them navigate.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>Bees use the Sun's position, visual landmarks and an internal sense of direction to navigate between flowers and their hive.</p>
-        <h4>How do bees share information?</h4>
-        <p>A honeybee can perform a waggle dance to communicate the direction and approximate distance of a food source to other bees.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="history">
+        <div class="article-art">🏺</div>
+        <div class="article-content">
+          <span class="category">History</span>
+          <h3>The Mystery of Ancient Pyramids</h3>
+          <p>How did ancient builders move enormous blocks of stone?</p>
+          <div class="article-body" hidden>
+            Ancient Egyptian pyramid builders used skilled labour, planning,
+            tools, and systems for transporting stone. Archaeological evidence
+            helps researchers understand how construction worked. Some details
+            remain debated, but there is strong evidence of human engineering,
+            not a need to assume supernatural explanations.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-    <article class="card" data-category="science">
-      <div class="card-art" aria-hidden="true">🌌</div><div class="card-body">
-      <span class="tag">Science · Atmosphere</span><h3>The Northern Lights Explained</h3>
-      <p>Charged particles interacting with Earth's atmosphere create colourful auroras.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>The aurora borealis, or northern lights, occurs when energetic charged particles interact with gases high in Earth's atmosphere. The southern counterpart is the aurora australis.</p>
-        <h4>Where do the colours come from?</h4>
-        <p>Different gases and altitudes produce different colours. Oxygen often produces green or red light, while nitrogen can contribute blue and purple.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="science">
+        <div class="article-art">⚡</div>
+        <div class="article-content">
+          <span class="category">Science</span>
+          <h3>Lightning Is Extremely Hot</h3>
+          <p>A lightning channel can become hotter than the surface of the Sun.</p>
+          <div class="article-body" hidden>
+            The air in a lightning channel can briefly reach temperatures
+            around 30,000 kelvin, several times hotter than the Sun's visible
+            surface. The rapid heating makes the air expand suddenly.
+            That expansion produces the sound wave we hear as thunder.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-    <article class="card" data-category="science">
-      <div class="card-art" aria-hidden="true">🔬</div><div class="card-body">
-      <span class="tag">Science · Microscopic life</span><h3>The Tiny Animal That Can Survive Extreme Conditions</h3>
-      <p>Tardigrades are microscopic animals known for surviving certain harsh conditions.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>Tardigrades, also called water bears, live in environments ranging from moss to marine habitats.</p>
-        <h4>How can they survive?</h4>
-        <p>Some species enter a dormant state called cryptobiosis when conditions become harsh. They can endure certain periods of drying and other environmental stresses, but they are not indestructible.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="mystery">
+        <div class="article-art">🌊</div>
+        <div class="article-content">
+          <span class="category">Mysteries</span>
+          <h3>The Deep Ocean's Hidden World</h3>
+          <p>Much of the deep seafloor remains difficult to explore.</p>
+          <div class="article-body" hidden>
+            The deep ocean has crushing pressure, near-freezing temperatures
+            in many areas, and almost complete darkness. Special submersibles
+            and remotely operated vehicles help researchers study it.
+            New observations continue to reveal unfamiliar animals and
+            ecosystems, including communities around hydrothermal vents.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-    <article class="card" data-category="space">
-      <div class="card-art" aria-hidden="true">🌠</div><div class="card-body">
-      <span class="tag">Space · The universe</span><h3>How Big Is the Universe?</h3>
-      <p>The observable universe contains an extraordinary number of galaxies and stars.</p>
-      <button class="read-btn" aria-expanded="false">Read the story →</button>
-      <div class="article-detail" hidden>
-        <p>The universe is about 13.8 billion years old. The observable universe is estimated to be about 93 billion light-years across.</p>
-        <h4>Why is it wider than 27.6 billion light-years?</h4>
-        <p>Space has expanded while light was travelling towards us. The entire universe may extend far beyond what we can observe, and scientists do not yet know whether it is finite or infinite.</p>
-      </div></div>
-    </article>
+      <article class="article-card" data-category="space">
+        <div class="article-art">☄️</div>
+        <div class="article-content">
+          <span class="category">Space</span>
+          <h3>What Are Shooting Stars?</h3>
+          <p>The bright streaks in the night sky are not usually stars.</p>
+          <div class="article-body" hidden>
+            A shooting star is a meteor: a streak of light produced when a
+            small piece of space debris enters Earth's atmosphere and heats
+            the surrounding gas. Most meteors are caused by tiny particles.
+            If a piece survives and reaches the ground, it is called a meteorite.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-  </div>
-  <div class="empty" id="emptyMessage"><h3>No articles found</h3><p>Try another search or category.</p></div>
-</section>
+      <article class="article-card" data-category="mystery">
+        <div class="article-art">🧭</div>
+        <div class="article-content">
+          <span class="category">Mysteries</span>
+          <h3>Why Do We Dream?</h3>
+          <p>Dreams are a fascinating part of the sleeping brain.</p>
+          <div class="article-body" hidden>
+            Dreams can happen during several stages of sleep and are often
+            vivid during REM sleep. Researchers have different ideas about
+            why we dream. Possible explanations include processing emotions,
+            organising memories, and the brain making sense of activity
+            during sleep. There is no single explanation for every dream.
+          </div>
+          <button class="read-btn">Read the story →</button>
+        </div>
+      </article>
 
-<section class="about" id="about">
-  <h2>Welcome to Curio.</h2>
-  <p>Curio is a place for curious minds. We explore science, space, history and nature through accessible articles designed to make learning interesting.</p>
-  <p>Our goal is simple: help you discover something amazing every day. Keep asking questions, exploring ideas and learning about the world around you.</p>
-</section>
-</main>
+    </div>
 
-<footer>
-  <a class="logo" href="#home">curio<span>.</span></a>
-  <p>Discover something amazing every day.</p>
-  <div class="footer-links">
-    <a href="#home">Home</a>
-    <a href="#articles">Articles</a>
-    <a href="#about">About Curio</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms &amp; Conditions</a>
-  </div>
-  <p>© <span id="year"></span> Curio. Keep exploring.</p>
-  <p>Educational content for general information.</p>
-</footer>
+    <p class="empty-message" id="emptyMessage">
+      No stories found. Try another search or choose a different category.
+    </p>
 
-<script>
-const cards = Array.from(document.querySelectorAll(".card"));
-const filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
-const searchInput = document.getElementById("searchInput");
-const emptyMessage = document.getElementById("emptyMessage");
-let activeCategory = "all";
+    <section class="about-strip">
+      <h2>Curious About Curio?</h2>
+      <p>
+        We created Curio for people who love learning about fascinating facts,
+        unusual discoveries, and the mysteries of our world.
+      </p>
+      <a class="hero-button" href="about.html">Learn About Us →</a>
+    </section>
 
-function filterArticles() {
-  const query = searchInput.value.trim().toLowerCase();
-  let visibleCount = 0;
+  </main>
 
-  cards.forEach(card => {
-    const matchesCategory =
-      activeCategory === "all" || card.dataset.category === activeCategory;
-    const matchesSearch = card.innerText.toLowerCase().includes(query);
-    const visible = matchesCategory && matchesSearch;
-    card.hidden = !visible;
-    if (visible) visibleCount++;
-  });
+  <footer>
+    <div class="footer-logo">Curio ✨</div>
+    <p>Stay curious. Keep discovering.</p>
 
-  emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
-}
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+    </div>
 
-filterButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    activeCategory = button.dataset.filter;
-    filterButtons.forEach(item => {
-      const selected = item === button;
-      item.classList.toggle("active", selected);
-      item.setAttribute("aria-pressed", String(selected));
+    <p class="copyright">
+      © 2026 Curio. All rights reserved.
+    </p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const cards = Array.from(document.querySelectorAll(".article-card"));
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    let selectedCategory = "all";
+
+    function filterArticles() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      cards.forEach(function(card) {
+        const category = card.dataset.category;
+        const text = card.innerText.toLowerCase();
+
+        const matchesCategory =
+          selectedCategory === "all" ||
+          category === selectedCategory;
+
+        const matchesSearch = text.includes(searchTerm);
+        const show = matchesCategory && matchesSearch;
+
+        card.style.display = show ? "flex" : "none";
+
+        if (show) {
+          visibleCount++;
+        }
+      });
+
+      emptyMessage.style.display =
+        visibleCount === 0 ? "block" : "none";
+    }
+
+    filterButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        selectedCategory = button.dataset.category;
+
+        filterButtons.forEach(function(item) {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        filterArticles();
+      });
     });
-    filterArticles();
-  });
-});
 
-searchInput.addEventListener("input", filterArticles);
+    searchInput.addEventListener("input", filterArticles);
 
-document.querySelectorAll(".read-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const detail = button.nextElementSibling;
-    const opening = detail.hidden;
-    detail.hidden = !opening;
-    button.setAttribute("aria-expanded", String(opening));
-    button.textContent = opening ? "Close story ↑" : "Read the story →";
-  });
-});
+    document.querySelectorAll(".read-btn").forEach(function(button) {
+      button.addEventListener("click", function() {
+        const card = button.closest(".article-card");
+        const articleBody = card.querySelector(".article-body");
+        const isHidden = articleBody.hidden;
 
-document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+        articleBody.hidden = !isHidden;
+        button.textContent = isHidden
+          ? "Show less ↑"
+          : "Read the story →";
+      });
+    });
+  </script>
+
 </body>
 </html>
